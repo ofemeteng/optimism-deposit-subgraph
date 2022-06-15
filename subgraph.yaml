@@ -1,0 +1,38 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TeleportrDeposit
+    network: mainnet
+    source:
+      address: "0x52ec2F3d7C5977A8E558C8D9C6000B615098E8fC"
+      abi: TeleportrDeposit
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BalanceWithdrawn
+        - EtherReceived
+        - MaxBalanceSet
+        - MaxDepositAmountSet
+        - MinDepositAmountSet
+        - OwnershipTransferred
+      abis:
+        - name: TeleportrDeposit
+          file: ./abis/TeleportrDeposit.json
+      eventHandlers:
+        - event: BalanceWithdrawn(indexed address,uint256)
+          handler: handleBalanceWithdrawn
+        - event: EtherReceived(indexed uint256,indexed address,indexed uint256)
+          handler: handleEtherReceived
+        - event: MaxBalanceSet(uint256,uint256)
+          handler: handleMaxBalanceSet
+        - event: MaxDepositAmountSet(uint256,uint256)
+          handler: handleMaxDepositAmountSet
+        - event: MinDepositAmountSet(uint256,uint256)
+          handler: handleMinDepositAmountSet
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/teleportr-deposit.ts

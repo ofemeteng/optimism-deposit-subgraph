@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: TeleportrDeposit
@@ -16,8 +16,8 @@ dataSources:
         - EtherReceived
       abis:
         - name: TeleportrDeposit
-          file: ./abis/TeleportrDeposit.json
+          file: TeleportrDeposit/abis/TeleportrDeposit.json
       eventHandlers:
         - event: EtherReceived(indexed uint256,indexed address,indexed uint256)
           handler: handleEtherReceived
-      file: ./src/teleportr-deposit.ts
+      file: TeleportrDeposit/TeleportrDeposit.wasm
